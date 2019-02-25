@@ -18,29 +18,32 @@ var guessesSoFarText = document.getElementById("guessesSoFarhtml");
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
 
-
-    if (wins === 1) {
-        break;
-    } else if (guessesLeft === 0) {
-        break;
-    }
-
     // Determines which key was pressed.
     var userGuess = event.key;
 
     // Randomly chooses a choice from the options array. This is the Computer's guess.
     var computerGuess = computerChoiceAllowed[Math.floor(Math.random() * computerChoiceAllowed.length)];
 
-    //guessesSoFar counts all key inputs
+    // guessesSoFar counts all key inputs
     guessesSoFar++;
 
-    // Sets up the win and loss condition if you guess wrong "try again" 
-    if (computerGuess === userGuess) {
-        wins++;
-    }
-    else {
-        losses++;
-        guessesLeft--;
+    // Game will run as long as guesses left does not reach 0
+    if (guessesLeft > 0) {
+
+        // When user guesses what the computer guesses, wins go up by 1 and guesses left reset to default 10
+        if (userGuess === computerGuess) {
+            wins++;
+            guessesLeft = 10;
+        }
+
+        // If user does not guess correctly, guesses left goes down and upon reaching 0, the user gets a loss and gets all 10 of their guesses to try again 
+        else if (userGuess !== computerGuess) {
+            guessesLeft--;
+            if (guessesLeft === 0) {
+                losses++;
+                guessesLeft = 10;
+            }
+        }
     }
 
     console.log(computerGuess);
