@@ -2,7 +2,7 @@
 var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
-var guessesSoFar = 0;
+var guessesSoFar = [];
 
 // Creates an array that lists out the only letters that can be guessed
 var userGuessAllowed = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -30,10 +30,10 @@ document.onkeyup = function (event) {
     // Determines which key was pressed.
     var userGuess = event.key;
     // var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
+    guessesSoFar.push(userGuess);
 
     // guessesSoFar counts all key inputs
-    guessesSoFar++;
+    // guessesSoFar++;
 
     // Game will run as long as guesses left does not reach 0
     if (guessesLeft > 0) {
@@ -44,6 +44,7 @@ document.onkeyup = function (event) {
             guessesLeft = 10;
             alert("You guessed it right! The computer guessed " + computerGuess + " also!")
             computerPickAgain();
+            guessesSoFar = [];
         }
 
         // If user does not guess correctly, guesses left goes down and upon reaching 0, the user gets a loss and gets all 10 of their guesses to try again 
@@ -54,6 +55,7 @@ document.onkeyup = function (event) {
                 alert("Try again?")
                 computerPickAgain();
                 guessesLeft = 10;
+                guessesSoFar = [];
             }
         }
     }
@@ -65,4 +67,5 @@ document.onkeyup = function (event) {
     lossesText.textContent = "Losses: " + losses;
     guessesLeftText.textContent = "Guess Left: " + guessesLeft;
     guessesSoFarText.textContent = "Guesses So Far: " + guessesSoFar;
+    document.getElementById('guessesSoFarhtml').innerHTML = "Guesses So Far: " + guessesSoFar.join(', ');
 };
