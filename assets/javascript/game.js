@@ -16,10 +16,12 @@ var guessesLeftText = document.getElementById("guessesLefthtml");
 var guessesSoFarText = document.getElementById("guessesSoFarhtml");
 var computerGuess = null;
 
-// Randomly chooses a choice from the options array. This is the Computer's guess.
+// Randomly chooses a choice from the options array. This is the Computer's guess. 
 function computerPickAgain() {
     this.computerGuess = this.computerChoiceAllowed[Math.floor(Math.random() * computerChoiceAllowed.length)];
 }
+
+// Function created so computer only picks a new letter upon a win or a loss
 computerPickAgain()
 
 // This function is run whenever the user presses a key.
@@ -40,6 +42,7 @@ document.onkeyup = function (event) {
         if (userGuess === computerGuess) {
             wins++;
             guessesLeft = 10;
+            alert("You guessed it right! The computer guessed " + computerGuess + " also!")
             computerPickAgain();
         }
 
@@ -48,6 +51,7 @@ document.onkeyup = function (event) {
             guessesLeft--;
             if (guessesLeft === 0) {
                 losses++;
+                alert("Try again?")
                 computerPickAgain();
                 guessesLeft = 10;
             }
