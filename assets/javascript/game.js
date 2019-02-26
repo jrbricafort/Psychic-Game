@@ -27,45 +27,57 @@ computerPickAgain()
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
 
+    var button = false;
+
     // Determines which key was pressed.
     var userGuess = event.key;
-    // var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-    guessesSoFar.push(userGuess);
 
-    // guessesSoFar counts all key inputs
-    // guessesSoFar++;
-
-    // Game will run as long as guesses left does not reach 0
-    if (guessesLeft > 0) {
-
-        // When user guesses what the computer guesses, wins go up by 1 and guesses left reset to default 10
-        if (userGuess === computerGuess) {
-            wins++;
-            guessesLeft = 10;
-            alert("You guessed it right! The computer guessed " + computerGuess + " also!")
-            computerPickAgain();
-            guessesSoFar = [];
-        }
-
-        // If user does not guess correctly, guesses left goes down and upon reaching 0, the user gets a loss and gets all 10 of their guesses to try again 
-        else if (userGuess !== computerGuess) {
-            guessesLeft--;
-            if (guessesLeft === 0) {
-                losses++;
-                alert("Try again?")
-                computerPickAgain();
-                guessesLeft = 10;
-                guessesSoFar = [];
-            }
+    for (var i = 0; i < userGuessAllowed.length; i++) {
+        if (userGuessAllowed[i] === userGuess) {
+            button = true;
         }
     }
 
-    console.log(computerGuess);
-    console.log(userGuess);
+    if (button) {
 
-    winsText.textContent = "Wins: " + wins;
-    lossesText.textContent = "Losses: " + losses;
-    guessesLeftText.textContent = "Guess Left: " + guessesLeft;
-    guessesSoFarText.textContent = "Guesses So Far: " + guessesSoFar;
-    document.getElementById('guessesSoFarhtml').innerHTML = "Guesses So Far: " + guessesSoFar.join(', ');
+        // var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        guessesSoFar.push(userGuess);
+
+        // guessesSoFar counts all key inputs
+        // guessesSoFar++;
+
+        // Game will run as long as guesses left does not reach 0
+        if (guessesLeft > 0) {
+
+            // When user guesses what the computer guesses, wins go up by 1 and guesses left reset to default 10
+            if (userGuess === computerGuess) {
+                wins++;
+                guessesLeft = 10;
+                alert("You guessed it right! The computer picked " + computerGuess + " also!")
+                computerPickAgain();
+                guessesSoFar = [];
+            }
+
+            // If user does not guess correctly, guesses left goes down and upon reaching 0, the user gets a loss and gets all 10 of their guesses to try again 
+            else if (userGuess !== computerGuess) {
+                guessesLeft--;
+                if (guessesLeft === 0) {
+                    losses++;
+                    alert("Try again?")
+                    computerPickAgain();
+                    guessesLeft = 10;
+                    guessesSoFar = [];
+                }
+            }
+        }
+
+        console.log("Computer Picked: " + computerGuess);
+        console.log("User Guessed: " + userGuess);
+
+        winsText.textContent = "Wins: " + wins;
+        lossesText.textContent = "Losses: " + losses;
+        guessesLeftText.textContent = "Guess Left: " + guessesLeft;
+        guessesSoFarText.textContent = "Guesses So Far: " + guessesSoFar;
+        document.getElementById('guessesSoFarhtml').innerHTML = "Guesses So Far: " + guessesSoFar.join(', ');
+    }
 };
