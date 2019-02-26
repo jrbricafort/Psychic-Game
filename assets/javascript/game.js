@@ -14,15 +14,21 @@ var winsText = document.getElementById("winshtml");
 var lossesText = document.getElementById("losseshtml");
 var guessesLeftText = document.getElementById("guessesLefthtml");
 var guessesSoFarText = document.getElementById("guessesSoFarhtml");
+var computerGuess = null;
+
+// Randomly chooses a choice from the options array. This is the Computer's guess.
+function computerPickAgain() {
+    this.computerGuess = this.computerChoiceAllowed[Math.floor(Math.random() * computerChoiceAllowed.length)];
+}
+computerPickAgain()
 
 // This function is run whenever the user presses a key.
 document.onkeyup = function (event) {
 
     // Determines which key was pressed.
     var userGuess = event.key;
+    // var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-    // Randomly chooses a choice from the options array. This is the Computer's guess.
-    var computerGuess = computerChoiceAllowed[Math.floor(Math.random() * computerChoiceAllowed.length)];
 
     // guessesSoFar counts all key inputs
     guessesSoFar++;
@@ -34,6 +40,7 @@ document.onkeyup = function (event) {
         if (userGuess === computerGuess) {
             wins++;
             guessesLeft = 10;
+            computerPickAgain();
         }
 
         // If user does not guess correctly, guesses left goes down and upon reaching 0, the user gets a loss and gets all 10 of their guesses to try again 
@@ -41,6 +48,7 @@ document.onkeyup = function (event) {
             guessesLeft--;
             if (guessesLeft === 0) {
                 losses++;
+                computerPickAgain();
                 guessesLeft = 10;
             }
         }
