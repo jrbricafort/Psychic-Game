@@ -1,23 +1,24 @@
 /* css file for psychic game */
 
-body{
+body {
     padding: 50px;
     margin: 30px;
     text-align: center;
-    background: pink;
+    background-image: url("https://lakeviewpsychicreadings.com/wp-content/uploads/2016/06/bigstock-Night-Sky-Stars-Background-88704050.jpg");
+    ;
     font-family: Arial, Helvetica, sans-serif;
     font: larger;
+    color:white;
 }
 
-.head{
+.head {
     font-size: 50px;
 }
 
-.prompt{
+.prompt {
     font-size: 30px;
 }
 
-.p{
+.p {
     font-size: 20px;
 }
-
